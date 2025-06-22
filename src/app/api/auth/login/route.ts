@@ -14,8 +14,14 @@ export async function POST(req: Request) {
 
     const user = await prisma.user.findFirst({
         where: {
-            email,
-            password
+            email: {
+                equals: email,
+                mode: "insensitive"
+            },
+            password: {
+                equals: password,
+                mode: "insensitive"
+            }        
         }
     })
 
